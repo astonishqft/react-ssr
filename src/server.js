@@ -29,13 +29,9 @@ const serverRender = async ({ pathname }) => {
     const PageComponent = getComponentByPath(routersConfig, pathname);
     const getInitialProps = PageComponent && PageComponent.getInitialProps;
 
-    console.log('====>>>> pathname', pathname);
-
     if (getInitialProps) {
       console.log('[SSR]', 'getting initial props of page component')
       pageInitialProps = await getInitialProps();
-
-      console.log('====>>>> pageInitialProps', pageInitialProps);
     }
   } catch (error) {
     console.log('[SSR] generate html template error')
