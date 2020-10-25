@@ -31,14 +31,11 @@ const serverRender = async ({ pathname }) => {
 
     console.log('====>>>> pathname', pathname);
 
-
-
     if (getInitialProps) {
       console.log('[SSR]', 'getting initial props of page component')
       pageInitialProps = await getInitialProps();
 
       console.log('====>>>> pageInitialProps', pageInitialProps);
-
     }
   } catch (error) {
     console.log('[SSR] generate html template error')
@@ -46,7 +43,7 @@ const serverRender = async ({ pathname }) => {
 
   const RootComponent = () => (
     <StaticRouter location={pathname} static={{}}>
-      {renderRouters(routersConfig)}
+      {renderRouters(routersConfig, pageInitialProps)}
     </StaticRouter>
   );
 

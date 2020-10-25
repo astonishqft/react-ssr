@@ -1,49 +1,38 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { isBrowser } from '@/utils/utils';
 import styles from './index.less';
 
 class Home extends Component {
-  static getInitialProps = async () => {
-    // const entry = 'http:localhost:3000/api/list'
-    // const { list = [] } = await axios(entry);
-
-    return {
-      home: {
-        list: [],
-      },
-    };
-  };
-
   render() {
+    const { home: { list = [] } } = this.props;
+
     return (
       <div className={styles.container}>
         <h2>Home page</h2>
+        <ul>
+          {
+            list && list.map((item) => <li key={item.id}>{item.title}</li>)
+          }
+        </ul>
       </div>
     );
   }
 }
 
-// Home.getInitialProps = async () => {
-//   console.log(88888)
-//   // const entry = 'http:localhost:3000/api/list'
-//   // try {
-//   //   const { list = [] } = await axios(entry);
+Home.getInitialProps = async () => {
+  const entry = isBrowser() ? '/users' : 'https://www.fastmock.site/mock/545c01c52d578bf9ecf5ec775968acda/api/list';
+  try {
+    const { data: { data: list } } = await axios(entry);
 
-//   // } catch(error) {
-//   //   console.log('error', error)
-//   // }
-
-//   const list = await new Promise(function(resolve, reject) {
-//     setTimeout(function() {
-//       resolve('成功')
-//     })
-//   })
-
-//   return {
-//     home: {
-//       list,
-//     },
-//   };
-// };
+    return {
+      home: {
+        list,
+      },
+    };
+  } catch (error) {
+    console.log('error', error)
+  }
+};
 
 export default Home;

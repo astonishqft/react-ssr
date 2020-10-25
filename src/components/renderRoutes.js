@@ -23,15 +23,15 @@ function withRoutes(route) {
   if (component) {
     const OldComponent = Component;
     Component = props => {
-      const [data, setData] = useState(typeof window !== 'undefined' ? (window).__PAGE_PROPS__ : {});
+      const [data, setData] = useState(typeof window !== 'undefined' ? (window).__GLOBAL_PAGE_PROPS__ : {});
       useEffect(() => {
         // When enter the page for the first time, need to use window.__ICE_PAGE_PROPS__ as props
         // And don't need to re-request to switch routes
         // Set the data to null after use, otherwise other pages will use
         async function fetchData() {
           if (typeof window !== 'undefined') {
-            if (window.__PAGE_PROPS__) {
-              window.__PAGE_PROPS__ = null;
+            if (window.__GLOBAL_PAGE_PROPS__) {
+              window.__GLOBAL_PAGE_PROPS__ = null;
             } else if (component.getInitialProps) {
               // When the server does not return data, the client calls getinitialprops
               (async () => {
