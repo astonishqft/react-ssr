@@ -12,8 +12,6 @@ function getComponentByPath(routes, currPath) {
     const matchedRoute = routeList.find(route => {
       return matchPath(currPath, route)
     })
-
-    console.log('=====>>>>5555', matchedRoute);
     if (matchedRoute) {
       return matchedRoute.children
         ? findMatchRoute(matchedRoute.children)
@@ -22,15 +20,8 @@ function getComponentByPath(routes, currPath) {
     return null
   }
   const matchedRoute = findMatchRoute(routes)
-
-  console.log('=====>>>>66666', matchedRoute);
-
   return matchedRoute && matchedRoute.component
 }
-
-// function test  = async () => {
-
-// }
 
 const serverRender = async ({ pathname }) => {
   let pageInitialProps = {}
@@ -40,24 +31,14 @@ const serverRender = async ({ pathname }) => {
 
     console.log('====>>>> pathname', pathname);
 
-    console.log('====>>>> PageComponent', PageComponent);
-
-    // console.log('====>>>> PageComponent', PageComponent());
-    // console.log('====>>>> PageComponent', PageComponent().getInitialProps);
-
-
-
-
-    console.log('====>>>> getInitialProps', getInitialProps);
-
-    console.log('====>>>> getInitialProps', getInitialProps().then(data => console.log(data, 66666)));
-
-
 
 
     if (getInitialProps) {
       console.log('[SSR]', 'getting initial props of page component')
-      pageInitialProps = await getInitialProps()
+      pageInitialProps = await getInitialProps();
+
+      console.log('====>>>> pageInitialProps', pageInitialProps);
+
     }
   } catch (error) {
     console.log('[SSR] generate html template error')
