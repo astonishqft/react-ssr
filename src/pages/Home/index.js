@@ -12,8 +12,12 @@ class Home extends Component {
     return (
       <div className={styles.container}>
         <div>
-          a标签跳转到：<a href="/login">Login Page</a>
-          Link标签跳转到 <Link to="/login">Login Page</Link>
+          <div>
+            a标签跳转到：<a href="/login">Login Page</a>
+          </div>
+          <div>
+            Link标签跳转到 <Link to="/login">Login Page</Link>
+          </div>
         </div>
         <h2 className={styles.title}>Home page</h2>
         <ul className={styles.list}>
