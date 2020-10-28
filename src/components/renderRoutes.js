@@ -23,7 +23,7 @@ function withRoutes(route) {
   if (component) {
     const OldComponent = Component;
     Component = props => {
-      const [data, setData] = useState(typeof window !== 'undefined' ? (window).__GLOBAL_PAGE_PROPS__ : {});
+      const [data, setData] = useState(typeof window !== 'undefined' ? window.__GLOBAL_PAGE_PROPS__ : {});
       useEffect(() => {
         // When enter the page for the first time, need to use window.__ICE_PAGE_PROPS__ as props
         // And don't need to re-request to switch routes
